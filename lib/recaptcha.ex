@@ -42,6 +42,10 @@ defmodule Recaptcha do
       {:ok, %{"success" => true, "challenge_ts" => timestamp, "hostname" => host}} ->
         {:ok, %Response{challenge_ts: timestamp, hostname: host}}
 
+      {:ok,
+       %{"success" => true, "challenge_ts" => timestamp, "apk_package_name" => apk_package_name}} ->
+        {:ok, %Response{challenge_ts: timestamp, hostname: apk_package_name}}
+
       {:ok, %{"success" => false, "challenge_ts" => _timestamp, "hostname" => _host}} ->
         {:error, [:challenge_failed]}
     end
